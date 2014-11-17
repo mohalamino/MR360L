@@ -1,0 +1,36 @@
+import sys
+from socket import *
+from time import sleep
+
+#_-_-__-_-_-_-_-_-Network Configuration-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+BCAST_GRP = '192.168.0.255'
+BCAST_PORT = 5007
+
+sock = socket(AF_INET, SOCK_DGRAM)
+sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+sock.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
+sock.bind(('', BCAST_PORT))
+
+
+print ('resetting USB...')
+sock.sendto("resetusb", (BCAST_GRP, BCAST_PORT)) #sending command shoot
+sleep(1)
+print ("5")
+sleep(1)
+print ("4")
+sleep(1)
+print ("3")
+sleep(1)
+print ("2")
+sleep(1)
+print ("1")
+sleep(1)
+print ('capturing...')
+sock.sendto("capture", (BCAST_GRP, BCAST_PORT)) #sending command shoot
+sleep(5)
+print ('resetting USB...')
+sock.sendto("resetusb", (BCAST_GRP, BCAST_PORT)) #sending command shoot
+#print ('rebooting all...')
+#sock.sendto("reboot", (BCAST_GRP, BCAST_PORT)) #sending command shoot
+sys.stdout.flush()
