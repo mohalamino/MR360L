@@ -1,0 +1,7 @@
+f=open('HI.txt','w')
+values= ['0','1']
+rpi_id=101
+
+f.write(('%s.%s.%s\n')%(rpi_id,values[0],values[1]))
+
+f.close()
